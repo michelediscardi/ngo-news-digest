@@ -27,6 +27,7 @@ GitHub is where the app's files live. Think of it as Google Drive for code.
    - `SETUP.md`
    - `README.md`
 7. Scroll down and click the green **Commit changes** button. ("Commit" just means "save".)
+8. **Check that all 8 files are listed** on your project page, especially `settings.yaml`. If one is missing, repeat steps 5–7 with just that file.
 
 ## Step 3 — Get your Mailchimp API key (3 min)
 The API key is like a password that lets the app create drafts in your Mailchimp account.
@@ -61,12 +62,18 @@ Bookmark the address. That's your app.
 
 ## Step 5 — Use it
 1. Open the app and enter your password.
-2. **First load takes about a minute** (it reads 20 websites and measures every article). After that it's instant for 3 hours.
+2. **First load takes about a minute** (it reads more than 70 websites and measures every article). After that it's instant for 3 hours.
 3. **Browse news**: use the filters on the left, then tick **Select** on the articles you like.
 4. **Newsletter tab**: write a subject and intro, reorder or rewrite the articles, check the preview, then click **📨 Create Mailchimp draft**. Click **Open the draft in Mailchimp**, check it, send yourself a test, and press **Send** when ready.
 5. **LinkedIn tab**: edit the post, click the 📋 icon on the grey box to copy it, click **Open LinkedIn**, paste, and publish.
 
 ---
+
+## Updating the app with new files from Claude
+When Claude changes the app, you get new versions of some files. To put them online:
+1. On GitHub, open your `ngo-news-digest` project → **Add file** → **Upload files**.
+2. Drag in the changed files. Files with the same name are replaced.
+3. Click **Commit changes**. The online app restarts with the new version within a minute or two.
 
 ## Changing things later (no coding)
 All the "content" settings are in **`settings.yaml`**: newsletter name and colour, the list of sources, and the themes with their keywords.
