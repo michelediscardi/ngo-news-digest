@@ -1,0 +1,133 @@
+# ---------------------------------------------------------------
+#  NGO News Digest – settings
+#  You can edit this file directly on GitHub (pencil icon ✏️).
+#  Rules: keep the spaces at the start of each line exactly as they are,
+#  and put text that contains ":" or "#" inside "quotes".
+# ---------------------------------------------------------------
+
+newsletter:
+  name: "NGO World Digest"          # shown at the top of the email
+  tagline: "The week's most relevant news from the NGO sector"
+  accent_color: "#1f6f5c"           # main colour of the email (hex code)
+
+# How many days back to look by default (you can change it in the app too)
+default_days: 7
+
+# ---------------------------------------------------------------
+#  SOURCES – each one needs a name, a feed address (RSS) and a language.
+#  language: en = English, es = Spanish
+#  To add a source: copy three lines, change them. To remove: delete them.
+# ---------------------------------------------------------------
+sources:
+  # English / international
+  - name: The New Humanitarian
+    url: https://www.thenewhumanitarian.org/rss/all.xml
+    language: en
+  - name: Devex
+    url: https://www.devex.com/news/feed.rss
+    language: en
+  - name: UN News
+    url: https://news.un.org/feed/subscribe/en/news/all/rss.xml
+    language: en
+  - name: The Guardian – Global Development
+    url: https://www.theguardian.com/global-development/rss
+    language: en
+  - name: Inter Press Service
+    url: https://www.ipsnews.net/feed/
+    language: en
+  - name: Alliance Magazine
+    url: https://www.alliancemagazine.org/feed/
+    language: en
+  - name: Stanford Social Innovation Review
+    url: https://ssir.org/site/rss_2.0
+    language: en
+  - name: Bond
+    url: https://www.bond.org.uk/feed/
+    language: en
+  - name: Human Rights Watch
+    url: https://www.hrw.org/rss/news
+    language: en
+  - name: Google News – NGOs
+    url: "https://news.google.com/rss/search?q=(NGO+OR+nonprofit+OR+charity)+when:7d&hl=en-US&gl=US&ceid=US:en"
+    language: en
+
+  # Spanish / Spain
+  - name: El País – Planeta Futuro
+    url: https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/planeta-futuro/portada
+    language: es
+  - name: eldiario.es – Desalambre
+    url: https://www.eldiario.es/rss/desalambre/
+    language: es
+  - name: Europa Press – EP Social
+    url: "https://www.europapress.es/rss/rss.aspx?ch=00313"
+    language: es
+  - name: IPS Noticias
+    url: https://ipsnoticias.net/feed/
+    language: es
+  - name: Coordinadora de ONGD
+    url: https://coordinadoraongd.org/feed/
+    language: es
+  - name: Revista Haz
+    url: https://hazrevista.org/feed/
+    language: es
+  - name: Compromiso Empresarial
+    url: https://www.compromisoempresarial.com/feed/
+    language: es
+  - name: Corresponsables
+    url: https://www.corresponsables.com/rss
+    language: es
+  - name: Google News – ONG
+    url: "https://news.google.com/rss/search?q=ONG+when:7d&hl=es&gl=ES&ceid=ES:es"
+    language: es
+  - name: Google News – Tercer sector
+    url: "https://news.google.com/rss/search?q=%22tercer+sector%22+when:7d&hl=es&gl=ES&ceid=ES:es"
+    language: es
+
+# ---------------------------------------------------------------
+#  THEMES – an article gets a theme when one of its keywords appears
+#  in the title or excerpt. Upper/lower case and accents don't matter.
+#  A "*" at the end means "any word starting with": migra* matches
+#  migrant, migration, migración, migrantes…
+#  hashtags are used in the LinkedIn posts.
+# ---------------------------------------------------------------
+themes:
+  Humanitarian & emergencies:
+    hashtags: [Humanitarian, HumanitarianAid]
+    keywords: [humanitarian*, emergenc*, crisis, famine, disaster*, earthquake*, flood*, cyclone*, hurricane*, conflict*, war, warfare, ceasefire, gaza, sudan, ukraine, yemen,
+               humanitari*, hambruna, catastrofe*, terremoto*, inundacion*, huracan*, guerra, alto el fuego, dana]
+  Climate & environment:
+    hashtags: [ClimateAction, Sustainability]
+    keywords: [climate, environment*, cop29, cop30, cop31, emission*, biodiversity, deforestation, drought*, carbon, fossil fuel*, heatwave*,
+               clima, climatic*, medio ambiente, medioambient*, emisiones, biodiversidad, deforestacion, sequia*, sostenib*, ola de calor]
+  Health:
+    hashtags: [GlobalHealth]
+    keywords: [health*, disease*, malaria, hiv, aids, vaccin*, cholera, mpox, ebola, hospital*, pandemic*, malnutrition,
+               salud, sanitari*, enfermedad*, vacuna*, vih, sida, colera, desnutricion, pandemia*]
+  Human rights & equality:
+    hashtags: [HumanRights, Equality]
+    keywords: [human rights, rights, discrimination, freedom, gender, women, girls, lgbt*, torture, detention, justice,
+               derechos humanos, derechos, discriminacion, igualdad, genero, mujeres, violencia machista, violencia de genero, feminis*, justicia]
+  Migration & refugees:
+    hashtags: [Refugees, Migration]
+    keywords: [migra*, refugee*, asylum, displaced, displacement, unhcr,
+               refugiad*, asilo, desplazad*, patera*, cayuco*, acnur]
+  Funding & philanthropy:
+    hashtags: [Philanthropy, Fundraising]
+    keywords: [funding, fund, donor*, donation*, philanthrop*, foundation*, grant*, aid cuts, usaid, fundrais*, budget*, giving,
+               financiacion, fondos, donante*, donacion*, filantrop*, fundacion*, subvencion*, recorte*, aod, presupuesto*, captacion de fondos, mecenazgo]
+  Children & education:
+    hashtags: [Education, ChildRights]
+    keywords: [child, children, education, school*, youth, unicef, teacher*,
+               infancia, infantil, nino*, nina*, menores, educacion, escuela*, colegio*, joven*, juventud]
+  Poverty & social inclusion:
+    hashtags: [EndPoverty, SocialInclusion]
+    keywords: [poverty, inequality, homeless*, hunger, food security, food insecurity, disabilit*, inclusion, housing,
+               pobreza, desigualdad*, exclusion, sinhogar, sin hogar, hambre, seguridad alimentaria, discapacidad, inclusion social, vivienda, dependencia]
+  NGO sector & volunteering:
+    hashtags: [NGO, Nonprofit, CivilSociety]
+    keywords: [ngo, ngos, nonprofit*, non-profit*, charity, charities, civil society, volunteer*, third sector,
+               ong, ongs, ongd, tercer sector, sociedad civil, voluntari*, entidades sociales, sin animo de lucro, economia social]
+  Development & cooperation:
+    hashtags: [SDGs, GlobalDevelopment]
+    keywords: [development, sdg*, sustainable development, agenda 2030, cooperation, global south,
+               desarrollo, ods, cooperacion, sur global]
