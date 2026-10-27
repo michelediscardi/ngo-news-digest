@@ -8,7 +8,8 @@
 newsletter:
   name: "NGO World Digest"          # shown at the top of the email
   tagline: "The week's most relevant news from the NGO sector"
-  accent_color: "#1f6f5c"           # main colour of the email (hex code)
+  accent_color: "#0a523a"           # main colour of the email: El Cami dark green
+  highlight_color: "#e9ff5e"        # thin highlight bar under the header: El Cami yellow
 
 # How many days back to look by default (you can change it in the app too)
 default_days: 7
@@ -16,70 +17,250 @@ default_days: 7
 # ---------------------------------------------------------------
 #  SOURCES – each one needs a name, a feed address (RSS) and a language.
 #  language: en = English, es = Spanish
-#  To add a source: copy three lines, change them. To remove: delete them.
+#  only_on_theme: true  = keep only articles that match one of the THEMES
+#  below (useful for general newspaper sections, to skip unrelated news).
+#  To add a source: copy its lines, change them. To remove: delete them.
 # ---------------------------------------------------------------
 sources:
-  # English / international
-  - name: The New Humanitarian
-    url: https://www.thenewhumanitarian.org/rss/all.xml
+  # ---- English / international (35 sources)
+  - name: "The New Humanitarian"
+    url: "https://www.thenewhumanitarian.org/rss/all.xml"
     language: en
-  - name: Devex
-    url: https://www.devex.com/news/feed.rss
+  - name: "Devex"
+    url: "https://www.devex.com/news/feed.rss"
     language: en
-  - name: UN News
-    url: https://news.un.org/feed/subscribe/en/news/all/rss.xml
+  - name: "UN News"
+    url: "https://news.un.org/feed/subscribe/en/news/all/rss.xml"
     language: en
-  - name: The Guardian – Global Development
-    url: https://www.theguardian.com/global-development/rss
+  - name: "The Guardian – Global Development"
+    url: "https://www.theguardian.com/global-development/rss"
     language: en
-  - name: Inter Press Service
-    url: https://www.ipsnews.net/feed/
+  - name: "The Guardian – Charities"
+    url: "https://www.theguardian.com/society/charities/rss"
     language: en
-  - name: Alliance Magazine
-    url: https://www.alliancemagazine.org/feed/
+  - name: "The Guardian – Refugees"
+    url: "https://www.theguardian.com/world/refugees/rss"
     language: en
-  - name: Stanford Social Innovation Review
-    url: https://ssir.org/site/rss_2.0
+  - name: "Inter Press Service"
+    url: "https://www.ipsnews.net/feed/"
     language: en
-  - name: Bond
-    url: https://www.bond.org.uk/feed/
+  - name: "Alliance Magazine"
+    url: "https://www.alliancemagazine.org/feed/"
     language: en
-  - name: Human Rights Watch
-    url: https://www.hrw.org/rss/news
+  - name: "Stanford Social Innovation Review"
+    url: "https://ssir.org/site/rss_2.0"
     language: en
-  - name: Google News – NGOs
-    url: "https://news.google.com/rss/search?q=(NGO+OR+nonprofit+OR+charity)+when:7d&hl=en-US&gl=US&ceid=US:en"
+  - name: "Nonprofit Quarterly"
+    url: "https://nonprofitquarterly.org/feed/"
+    language: en
+  - name: "The NonProfit Times"
+    url: "https://www.thenonprofittimes.com/feed/"
+    language: en
+  - name: "NonProfit PRO"
+    url: "https://www.nonprofitpro.com/feed/"
+    language: en
+  - name: "UK Fundraising"
+    url: "https://fundraising.co.uk/feed/"
+    language: en
+  - name: "Center for Effective Philanthropy"
+    url: "https://cep.org/feed/"
+    language: en
+  - name: "Charity Navigator"
+    url: "https://www.charitynavigator.org/feed"
+    language: en
+  - name: "Bond"
+    url: "https://www.bond.org.uk/feed/"
+    language: en
+  - name: "CIVICUS"
+    url: "https://www.civicus.org/index.php/media-resources/news?format=feed"
+    language: en
+  - name: "PassBlue (UN coverage)"
+    url: "https://www.passblue.com/feed/"
+    language: en
+  - name: "Devpolicy Blog"
+    url: "https://devpolicy.org/feed/"
+    language: en
+  - name: "NextBillion"
+    url: "https://nextbillion.net/feed/"
+    language: en
+  - name: "Health Policy Watch"
+    url: "https://healthpolicy-watch.news/feed/"
+    language: en
+  - name: "Climate Home News"
+    url: "https://www.climatechangenews.com/feed/"
+    language: en
+  - name: "Mongabay"
+    url: "https://news.mongabay.com/feed/"
+    language: en
+    only_on_theme: true
+  - name: "Global Voices"
+    url: "https://globalvoices.org/feed/"
+    language: en
+    only_on_theme: true
+  - name: "International Crisis Group"
+    url: "https://www.crisisgroup.org/rss.xml"
+    language: en
+  - name: "Human Rights Watch"
+    url: "https://www.hrw.org/rss/news"
+    language: en
+  - name: "Amnesty International"
+    url: "https://www.amnesty.org/en/latest/feed/"
+    language: en
+  - name: "Refugees International"
+    url: "https://www.refugeesinternational.org/feed/"
+    language: en
+  - name: "World Health Organization"
+    url: "https://www.who.int/rss-feeds/news-english.xml"
+    language: en
+  - name: "UN Women"
+    url: "https://www.unwomen.org/en/rss.xml"
+    language: en
+  - name: "UN Sustainable Development"
+    url: "https://www.un.org/sustainabledevelopment/feed/"
+    language: en
+  - name: "IFRC (Red Cross Red Crescent)"
+    url: "https://www.ifrc.org/rss.xml"
+    language: en
+  - name: "MSF (Doctors Without Borders)"
+    url: "https://www.msf.org/rss/all"
+    language: en
+  - name: "Oxfam International"
+    url: "https://www.oxfam.org/en/rss.xml"
+    language: en
+  - name: "CARE"
+    url: "https://www.care.org/feed/"
     language: en
 
-  # Spanish / Spain
-  - name: El País – Planeta Futuro
-    url: https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/planeta-futuro/portada
+  # ---- Spanish / Spain (38 sources)
+  - name: "El País – Planeta Futuro"
+    url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/planeta-futuro/portada"
     language: es
-  - name: eldiario.es – Desalambre
-    url: https://www.eldiario.es/rss/desalambre/
+  - name: "El País – Sociedad"
+    url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/sociedad/portada"
     language: es
-  - name: Europa Press – EP Social
+    only_on_theme: true
+  - name: "El País – Clima y Medio Ambiente"
+    url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/clima-y-medio-ambiente/portada"
+    language: es
+  - name: "eldiario.es – Desalambre"
+    url: "https://www.eldiario.es/rss/desalambre/"
+    language: es
+  - name: "eldiario.es – Sociedad"
+    url: "https://www.eldiario.es/rss/sociedad/"
+    language: es
+    only_on_theme: true
+  - name: "eldiario.es – Ballena Blanca"
+    url: "https://www.eldiario.es/rss/ballenablanca/"
+    language: es
+  - name: "Europa Press – EP Social"
     url: "https://www.europapress.es/rss/rss.aspx?ch=00313"
     language: es
-  - name: IPS Noticias
-    url: https://ipsnoticias.net/feed/
+  - name: "Europa Press – Sociedad"
+    url: "https://www.europapress.es/rss/rss.aspx?ch=00073"
     language: es
-  - name: Coordinadora de ONGD
-    url: https://coordinadoraongd.org/feed/
+    only_on_theme: true
+  - name: "La Vanguardia – Sociedad"
+    url: "https://www.lavanguardia.com/rss/vida.xml"
     language: es
-  - name: Revista Haz
-    url: https://hazrevista.org/feed/
+    only_on_theme: true
+  - name: "ABC – Sociedad"
+    url: "https://www.abc.es/rss/2.0/sociedad/"
     language: es
-  - name: Compromiso Empresarial
-    url: https://www.compromisoempresarial.com/feed/
+    only_on_theme: true
+  - name: "El Salto – Migración"
+    url: "https://www.elsaltodiario.com/migracion/feed"
     language: es
-  - name: Corresponsables
-    url: https://www.corresponsables.com/rss
+  - name: "La Marea"
+    url: "https://www.lamarea.com/feed/"
     language: es
-  - name: Google News – ONG
+    only_on_theme: true
+  - name: "Ethic"
+    url: "https://ethic.es/feed/"
+    language: es
+  - name: "IPS Noticias"
+    url: "https://ipsnoticias.net/feed/"
+    language: es
+  - name: "Noticias ONU"
+    url: "https://news.un.org/feed/subscribe/es/news/all/rss.xml"
+    language: es
+  - name: "Revista Haz"
+    url: "https://hazrevista.org/feed/"
+    language: es
+  - name: "Corresponsables"
+    url: "https://www.corresponsables.com/rss"
+    language: es
+  - name: "Coordinadora de ONGD"
+    url: "https://www.coordinadoraongd.org/feed/"
+    language: es
+  - name: "Plataforma del Voluntariado"
+    url: "https://plataformavoluntariado.org/feed/"
+    language: es
+  - name: "Plataforma de Infancia"
+    url: "https://www.plataformadeinfancia.org/feed/"
+    language: es
+  - name: "Fundación Lealtad"
+    url: "https://www.fundacionlealtad.org/feed/"
+    language: es
+  - name: "Asociación Española de Fundraising"
+    url: "https://www.aefundraising.org/feed/"
+    language: es
+  - name: "Hazloposible"
+    url: "https://www.hazloposible.org/feed/"
+    language: es
+  - name: "Mundo Cooperante"
+    url: "https://www.mundocooperante.org/feed/"
+    language: es
+  - name: "Oxfam Intermón"
+    url: "https://blog.oxfamintermon.org/feed/"
+    language: es
+  - name: "Manos Unidas"
+    url: "https://www.manosunidas.org/rss.xml"
+    language: es
+  - name: "ActionAid España"
+    url: "https://www.alianzaporlasolidaridad.org/feed"
+    language: es
+  - name: "Greenpeace España"
+    url: "https://es.greenpeace.org/es/feed/"
+    language: es
+  - name: "ONGAWA"
+    url: "https://www.ongawa.org/feed/"
+    language: es
+  - name: "Fundación EDUCO"
+    url: "https://www.educo.org/feed"
+    language: es
+  - name: "Aldeas Infantiles SOS"
+    url: "https://www.aldeasinfantiles.es/rss"
+    language: es
+  - name: "Red Acoge"
+    url: "https://www.redacoge.org/feed/"
+    language: es
+  - name: "Provivienda"
+    url: "https://www.provivienda.org/feed/"
+    language: es
+  - name: "HOGAR SÍ"
+    url: "https://www.hogarsi.org/feed/"
+    language: es
+  - name: "Fundación Adecco"
+    url: "https://www.fundacionadecco.org/feed/"
+    language: es
+  - name: "Fundación Esplai"
+    url: "https://fundacionesplai.org/feed/"
+    language: es
+  - name: "Fundación Manantial"
+    url: "https://www.fundacionmanantial.org/feed/"
+    language: es
+  - name: "Fad Juventud"
+    url: "https://www.fad.es/feed/"
+    language: es
+
+  # ---- Google News searches (switched off by default in the app)
+  - name: "Google News – NGOs"
+    url: "https://news.google.com/rss/search?q=(NGO+OR+nonprofit+OR+charity)+when:7d&hl=en-US&gl=US&ceid=US:en"
+    language: en
+  - name: "Google News – ONG"
     url: "https://news.google.com/rss/search?q=ONG+when:7d&hl=es&gl=ES&ceid=ES:es"
     language: es
-  - name: Google News – Tercer sector
+  - name: "Google News – Tercer sector"
     url: "https://news.google.com/rss/search?q=%22tercer+sector%22+when:7d&hl=es&gl=ES&ceid=ES:es"
     language: es
 

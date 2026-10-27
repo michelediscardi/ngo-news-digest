@@ -22,12 +22,14 @@ GitHub is where the app's files live. Think of it as Google Drive for code.
    - `news.py`
    - `publish.py`
    - `settings.yaml`
+   - `style.css`
    - `requirements.txt`
    - `BRIEF.md`
    - `SETUP.md`
    - `README.md`
+   - the **`.streamlit`** folder (it holds `config.toml`, the app's colours and fonts). Your Mac hides folders whose name starts with a dot: in Finder press **Cmd + Shift + .** (full stop) to show it, then drag the whole folder in. Press the same keys again to hide it.
 7. Scroll down and click the green **Commit changes** button. ("Commit" just means "save".)
-8. **Check that all 8 files are listed** on your project page, especially `settings.yaml`. If one is missing, repeat steps 5–7 with just that file.
+8. **Check that everything is listed** on your project page: the 9 files plus the `.streamlit` folder. If something is missing, repeat steps 5–7 with just that file or folder.
 
 ## Step 3 — Get your Mailchimp API key (3 min)
 The API key is like a password that lets the app create drafts in your Mailchimp account.
@@ -72,8 +74,11 @@ Bookmark the address. That's your app.
 ## Updating the app with new files from Claude
 When Claude changes the app, you get new versions of some files. To put them online:
 1. On GitHub, open your `ngo-news-digest` project → **Add file** → **Upload files**.
-2. Drag in the changed files. Files with the same name are replaced.
+2. Drag in the changed files. Files with the same name are replaced. For the `.streamlit` folder, first press **Cmd + Shift + .** in Finder so it becomes visible.
 3. Click **Commit changes**. The online app restarts with the new version within a minute or two.
+4. Not sure which files changed? Upload all of them. It's always safe.
+
+**If you can't get the `.streamlit` folder to upload:** on GitHub click **Add file**, then **Create new file**. Type `.streamlit/config.toml` as the name (the `/` creates the folder). Open `config.toml` from your Mac in TextEdit, copy everything, paste it into the GitHub box, and click **Commit changes**.
 
 ## Changing things later (no coding)
 All the "content" settings are in **`settings.yaml`**: newsletter name and colour, the list of sources, and the themes with their keywords.

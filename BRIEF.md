@@ -12,10 +12,12 @@ You, the editor. The app is protected with a password, so the public never sees 
 ## What it does
 
 ### 1. Gather
-- Reads 20 trusted sources automatically through their news feeds (RSS), each time you open the app (results are kept for 3 hours so it stays fast).
-- **English / international:** The New Humanitarian, Devex, UN News, The Guardian Global Development, Inter Press Service, Alliance Magazine, Stanford Social Innovation Review, Bond, Human Rights Watch, and a Google News search for "NGO / nonprofit / charity".
-- **Spanish / Spain:** El País Planeta Futuro, eldiario.es Desalambre, Europa Press Social, IPS Noticias, Coordinadora de ONGD, Revista Haz, Compromiso Empresarial, Corresponsables, and Google News searches for "ONG" and "tercer sector".
-- Removes duplicates, such as the same story picked up by two sources.
+- Reads **73 trusted sources** automatically through their news feeds (RSS), each time you open the app (results are kept for 3 hours so it stays fast).
+- **English / international (35):** NGO-sector media (Devex, The New Humanitarian, Alliance Magazine, Stanford Social Innovation Review, Nonprofit Quarterly, The NonProfit Times, NonProfit PRO, UK Fundraising, Center for Effective Philanthropy, Charity Navigator, Bond, CIVICUS), news outlets (The Guardian Global Development, Charities and Refugees sections, Inter Press Service, PassBlue, Devpolicy, NextBillion, Health Policy Watch, Climate Home News, Mongabay, Global Voices), and the newsrooms of UN agencies and NGOs (UN News, WHO, UN Women, UN Sustainable Development, IFRC, MSF, Oxfam, CARE, Human Rights Watch, Amnesty, Crisis Group, Refugees International).
+- **Spanish / Spain (38):** newspapers' social sections (El País Planeta Futuro, Sociedad and Clima; eldiario.es Desalambre, Sociedad and Ballena Blanca; Europa Press Social and Sociedad; La Vanguardia; ABC; El Salto Migración; La Marea; Ethic; IPS Noticias; Noticias ONU), Third Sector media and networks (Revista Haz, Corresponsables, Coordinadora de ONGD, Plataforma del Voluntariado, Plataforma de Infancia, Fundación Lealtad, Asociación Española de Fundraising, Hazloposible, Mundo Cooperante), and NGOs' own news (Oxfam Intermón, Manos Unidas, ActionAid, Greenpeace, ONGAWA, EDUCO, Aldeas Infantiles SOS, Red Acoge, Provivienda, HOGAR SÍ, Fundación Adecco, Fundación Esplai, Fundación Manantial, Fad Juventud).
+- Optional **Google News searches** ("NGO / nonprofit / charity", "ONG", "tercer sector") for even wider coverage. They're switched off by default.
+- General newspaper sections are filtered so that only articles matching one of your themes are kept, which removes crime, weather and sport.
+- **No duplicates:** when several sources publish the same story (same link, nearly the same headline, or the same press-release text within 3 days), it appears once, with "Also covered by: …" listing the other outlets.
 - Sources can be added or removed by editing one file (`settings.yaml`), with no coding.
 
 ### 2. Organise
@@ -28,6 +30,11 @@ You, the editor. The app is protected with a password, so the public never sees 
 ### 3. Publish
 - **Newsletter (Mailchimp)**: tick the articles you want, write a subject line and a short intro, optionally rewrite each article's blurb, preview the email, then press one button. A **draft** campaign appears in your Mailchimp account. Nothing is ever sent automatically: you review it in Mailchimp and press Send yourself. A downloadable HTML version is also available.
 - **LinkedIn**: for each ticked article the app prepares a ready-to-edit post (in the article's language, with hashtags based on its themes). You copy the text, click "Open LinkedIn", and paste. LinkedIn does not allow apps to post on your behalf without a lengthy approval process, so this copy-and-paste step is intentional.
+
+## Look and feel
+- Follows the **El Cami design system**: Inter as the only typeface, dark green for headlines and main actions, off-white page with white cards, mist-blue side panel, yellow only for small highlights (selected items, the bar under the email header), square labels and controls, borders instead of shadows, Material icons, no emoji.
+- Three numbered steps: **[01] Choose news**, **[02] Newsletter**, **[03] LinkedIn**. A bar at the bottom shows how many stories are selected and leads to the newsletter.
+- Works on phones and computers. The newsletter email uses the same style.
 
 ## What it deliberately does NOT do (for now)
 - No AI writing. Summaries come from the sources' own excerpts, and you can edit them. AI summaries can be added later.
