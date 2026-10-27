@@ -1,0 +1,35 @@
+# Look and feel of the app, based on the El Cami design system.
+[theme]
+base = "light"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+headingFontWeights = 600
+baseFontSize = 16
+primaryColor = "#0a523a"            # dark-green: primary actions, selected states
+backgroundColor = "#eeeeee"         # off-white: page ground
+secondaryBackgroundColor = "#ffffff" # white: inputs and raised panels
+textColor = "#000000"               # ink
+linkColor = "#0a523a"
+linkUnderline = true
+borderColor = "#808080"             # line
+showWidgetBorder = true
+baseRadius = "0"                    # El Cami controls are square
+buttonRadius = "0"
+# Messages: the palette has no red; problems show on a yellow field with black text
+redColor = "#000000"
+redBackgroundColor = "#e9ff5e"
+redTextColor = "#000000"
+yellowBackgroundColor = "#e9ff5e"
+yellowTextColor = "#000000"
+blueBackgroundColor = "#d6e2e2"
+blueTextColor = "#000000"
+greenBackgroundColor = "#d6e2e2"
+greenTextColor = "#0a523a"
+
+[theme.sidebar]
+backgroundColor = "#d6e2e2"         # mist-blue panel
+secondaryBackgroundColor = "#ffffff"
+textColor = "#000000"
+borderColor = "#808080"
+
+[client]
+toolbarMode = "minimal"
