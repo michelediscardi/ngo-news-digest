@@ -33,7 +33,10 @@ You, the editor. The app is protected with a password, so the public never sees 
 
 ## Look and feel
 - Follows the **El Cami design system**: Inter as the only typeface, dark green for headlines and main actions, off-white page with white cards, mist-blue side panel, yellow only for small highlights (selected items, the bar under the email header), square labels and controls, borders instead of shadows, Material icons, no emoji.
-- Three numbered steps: **[01] Choose news**, **[02] Newsletter**, **[03] LinkedIn**. A bar at the bottom shows how many stories are selected and leads to the newsletter.
+- Always light, even on devices set to dark mode.
+- Sign-in page in a split layout: a green brand panel on the left, the El Cami logo and the password on the right.
+- A top bar with the El Cami logo and a "Visit elcami.eu" link (both open the website in a new window), plus a yellow **Donate** button that opens the donation page.
+- Three numbered steps: **[01] Choose news**, **[02] Newsletter**, **[03] LinkedIn**, shown as three large clickable tiles with live status (articles found, stories selected, posts ready). A bar at the bottom shows how many stories are selected and leads to the newsletter.
 - Works on phones and computers. The newsletter email uses the same style.
 
 ## What it deliberately does NOT do (for now)

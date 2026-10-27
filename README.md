@@ -13,5 +13,7 @@ Collects the latest NGO-sector news in English and Spanish, filters it by theme 
 | `publish.py` | Builds the newsletter email, talks to Mailchimp, prepares LinkedIn posts |
 | `settings.yaml` | Your editable settings |
 | `style.css` | The app's visual details (El Cami design system) |
-| `.streamlit/config.toml` | The app's colours, font and square corners (El Cami) |
+| `theme.py` | Applies the El Cami colours and font, always in light mode |
+| `assets/` | The El Cami logo |
+| `.streamlit/config.toml` | The same theme as a settings file (optional) |
 | `requirements.txt` | The list of free building blocks the app needs |

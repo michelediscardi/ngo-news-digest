@@ -11,6 +11,13 @@ newsletter:
   accent_color: "#0a523a"           # main colour of the email: El Cami dark green
   highlight_color: "#e9ff5e"        # thin highlight bar under the header: El Cami yellow
 
+# Logo and links shown at the top of the app (they open in a new window)
+brand:
+  logo: assets/elcami-wordmark-green.png
+  name: "El Cami"
+  website_url: "https://elcami.eu/"
+  donate_url: "https://elcami.eu/donate#donate-box"
+
 # How many days back to look by default (you can change it in the app too)
 default_days: 7
 

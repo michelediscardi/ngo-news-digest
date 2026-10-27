@@ -1,6 +1,7 @@
 """NGO News Digest – the web app. Start it with:  streamlit run app.py"""
 from __future__ import annotations
 
+import base64
 import hmac
 import html
 import os
@@ -15,6 +16,10 @@ import yaml
 
 import news
 import publish
+import theme
+
+if theme.apply():  # first visit after a restart: reload once so the El Cami light theme is used
+    st.rerun()
 
 st.set_page_config(page_title="NGO News Digest", page_icon=":material/public:", layout="wide")
 
@@ -25,11 +30,7 @@ LANGUAGES = {"en": "English", "es": "Spanish"}
 SORTS = ["Newest", "Longest read", "Shortest read"]
 NO_THEME = "Other"
 PAGE_SIZE = 30
-VIEWS = {
-    "browse": ":material/newspaper: Choose news",
-    "newsletter": ":material/mail: Newsletter",
-    "linkedin": ":material/share: LinkedIn",
-}
+VIEWS = ["browse", "newsletter", "linkedin"]
 # Streamlit forgets what you typed in a field when that field is not on screen
 # (e.g. after switching to another step). Re-saving these on every run keeps them.
 KEEP = ("f_", "nl_", "blurb_", "li_", "mc_")
@@ -82,25 +83,7 @@ if STYLE_FILE.exists():
     st.html(f"<style>{STYLE_FILE.read_text(encoding='utf-8')}</style>")
 
 
-# ----------------------------------------------------------------- password
-password = secret("APP_PASSWORD")
-if password and not ss.get("authed"):
-    _, mid, _ = st.columns([1, 1.3, 1])
-    with mid:
-        st.html('<div class="app-header" style="border:0"><p class="eyebrow">NGO News Digest</p>'
-                '<h1>Welcome back</h1><p class="callout">Enter the app password to continue.</p></div>')
-        with st.form("login", border=False):
-            typed = st.text_input("Password", type="password")
-            entered = st.form_submit_button("Enter", type="primary", width="stretch")
-        if entered:
-            if hmac.compare_digest(typed.encode(), password.encode()):
-                ss.authed = True
-                st.rerun()
-            st.error("That password isn't right. Try again.", icon=":material/priority_high:")
-    st.stop()
-
-
-# ----------------------------------------------------------------- settings and data
+# ----------------------------------------------------------------- settings
 if not SETTINGS_FILE.exists():
     st.error("**settings.yaml is missing.** Upload the `settings.yaml` file to your GitHub project "
              "(same place as app.py), then reload this page in a minute.", icon=":material/priority_high:")
@@ -113,7 +96,72 @@ except yaml.YAMLError as e:
              f"Check the line mentioned here:\n\n```\n{e}\n```", icon=":material/priority_high:")
     st.stop()
 
+brand = settings.get("brand") or {}
+_logo_file = HERE / str(brand.get("logo", ""))
+LOGO_SRC = ("data:image/png;base64," + base64.b64encode(_logo_file.read_bytes()).decode()
+            if brand.get("logo") and _logo_file.is_file() else "")
+BRAND_NAME = brand.get("name", "")
 
+
+def logo_html(cls: str = "brand-logo") -> str:
+    if LOGO_SRC:
+        return f'<img class="{cls}" src="{LOGO_SRC}" alt="{esc(BRAND_NAME)}">'
+    return f'<span class="{cls} brand-text">{esc(BRAND_NAME)}</span>' if BRAND_NAME else ""
+
+
+# ----------------------------------------------------------------- sign in
+password = secret("APP_PASSWORD")
+if password and not ss.get("authed"):
+    st.html("<style>"
+            "[data-testid='stMainBlockContainer']{max-width:none!important;padding:0!important}"
+            "[data-testid='stHeader'],[data-testid='stSidebarCollapsedControl']{display:none!important}"
+            "</style>")
+    art, form_col = st.columns([1.1, 1], gap=None)
+    with art:
+        with st.container(key="login-art"):
+            st.html(f"""
+<div class="login-art-inner">
+  <p class="login-eyebrow">NGO News Digest</p>
+  <h1 class="login-headline">The NGO world, gathered in one place.</h1>
+  <p class="login-sub">The week's news from more than 70 sources in English and Spanish, ready to share as a
+  newsletter or on LinkedIn.</p>
+  <ul class="login-points">
+    <li>{icon('public')} Gather news from the sector</li>
+    <li>{icon('mail')} Build a Mailchimp newsletter</li>
+    <li>{icon('share')} Prepare LinkedIn posts</li>
+  </ul>
+  <p class="login-tagline">Impact that multiplies</p>
+</div>""")
+    with form_col:
+        with st.container(key="login-form"):
+            if LOGO_SRC or BRAND_NAME:
+                st.html(f'<a href="{esc(brand.get("website_url", "#"))}" target="_blank" rel="noopener noreferrer" '
+                        f'class="login-logo-link" aria-label="{esc(BRAND_NAME)} website (opens in a new window)">'
+                        f'{logo_html("login-logo")}</a>')
+            st.html('<h2 class="login-title">Sign in</h2>'
+                    '<p class="login-lead">Welcome back. Enter the team password to open NGO News Digest.</p>')
+            with st.form("login", border=False):
+                typed = st.text_input("Password", type="password", placeholder="Team password")
+                entered = st.form_submit_button("Sign in", type="primary", width="stretch",
+                                                icon=":material/arrow_forward:")
+            if entered:
+                if hmac.compare_digest(typed.encode(), password.encode()):
+                    ss.authed = True
+                    st.rerun()
+                st.error("That password isn't right. Check it and try again.", icon=":material/priority_high:")
+            links = []
+            if brand.get("website_url"):
+                links.append(f'<a href="{esc(brand["website_url"])}" target="_blank" rel="noopener noreferrer">'
+                             f'{esc(BRAND_NAME or "Website")} website {icon("north_east")}</a>')
+            if brand.get("donate_url"):
+                links.append(f'<a href="{esc(brand["donate_url"])}" target="_blank" rel="noopener noreferrer">'
+                             'Donate</a>')
+            st.html('<p class="login-help">No password? Ask the person who set up the app.</p>'
+                    + (f'<p class="login-links">{"".join(links)}</p>' if links else ""))
+    st.stop()
+
+
+# ----------------------------------------------------------------- data
 @st.cache_data(ttl=3 * 3600, show_spinner="Gathering the latest news from all sources. "
                                          "This takes about a minute the first time.")
 def load_articles(settings_text: str):
@@ -151,15 +199,6 @@ def move(aid: str, step: int):
     j = max(0, min(len(ids) - 1, i + step))
     ids[i], ids[j] = ids[j], ids[i]
     ss.selected = {k: ss.selected[k] for k in ids}
-
-
-def go(view: str):
-    ss.nav = view
-
-
-def keep_nav():
-    if ss.nav is None:  # clicking the active step again would otherwise unselect it
-        ss.nav = ss.get("_nav_prev", "browse")
 
 
 def keep_sort():
@@ -219,7 +258,7 @@ with st.sidebar:
 if ss.f_sort not in SORTS:
     ss.f_sort = "Newest"
 if ss.nav not in VIEWS:
-    ss.nav = ss.get("_nav_prev", "browse")
+    ss.nav = "browse"
 cutoff = datetime.now(timezone.utc) - timedelta(days=ss.f_days)
 query = news.normalize(ss.f_search.strip())
 langs = ss.f_langs or list(LANGUAGES)
@@ -258,30 +297,56 @@ selected = list(ss.selected.values())
 active_sources = len({a["feed"] for a in articles if ss.f_google or not a["is_google"]})
 
 
-# ----------------------------------------------------------------- header + steps
-PIXELS = ["ooomyggy", "oooomygm", "oooooomy"]
-pixel_html = "".join(f'<i class="{c}"></i>' for row in PIXELS for c in row)
+# ----------------------------------------------------------------- top bar
+website, donate = brand.get("website_url"), brand.get("donate_url")
+site_label = re.sub(r"^https?://(www\.)?", "", website or "").rstrip("/")
+actions = ""
+if website:
+    actions += (f'<a class="topbar-link" href="{esc(website)}" target="_blank" rel="noopener noreferrer">'
+                f'Visit {esc(site_label)} {icon("north_east")}</a>')
+if donate:
+    actions += (f'<a class="btn-donate" href="{esc(donate)}" target="_blank" rel="noopener noreferrer">'
+                'Donate</a>')
+logo = logo_html()
+if logo and website:
+    logo = (f'<a class="topbar-logo" href="{esc(website)}" target="_blank" rel="noopener noreferrer" '
+            f'aria-label="{esc(BRAND_NAME)} website (opens in a new window)">{logo}</a>')
+st.html(f'<div class="topbar"><div class="topbar-left">{logo}<span class="topbar-app">NGO News Digest</span></div>'
+        f'<div class="topbar-actions">{actions}</div></div>')
+
 st.html(f"""
 <div class="app-header">
-  <div class="pixel-grid" aria-hidden="true">{pixel_html}</div>
-  <p class="eyebrow">NGO News Digest</p>
   <h1>The NGO world, this week</h1>
   <p class="callout">News from {active_sources} sources in English and Spanish. Pick the stories
   worth sharing, then turn them into a newsletter or LinkedIn posts.</p>
-  <div class="stats">
-    <div class="stat"><div class="num">{len(shown)}</div><div class="lbl-txt">Articles match</div></div>
-    <div class="stat"><div class="num">{active_sources}</div><div class="lbl-txt">Sources</div></div>
-    <div class="stat{' hl' if selected else ''}"><div class="num">{len(selected)}</div><div class="lbl-txt">Selected</div></div>
-  </div>
 </div>""")
 
 
-# Labels must never change (e.g. with a count in them): Streamlit would treat the
-# control as a new one and forget which step is open.
-st.segmented_control("Step", list(VIEWS), format_func=VIEWS.get, key="nav",
-                     on_change=keep_nav, label_visibility="collapsed")
-view = ss.nav or "browse"
-ss._nav_prev = view
+# ----------------------------------------------------------------- the 3-step hub
+def go(view: str):
+    ss.nav = view
+
+
+n_sel = len(selected)
+STEPS = [
+    ("browse", "01", "newspaper", "Choose news", f"{len(shown)} articles found",
+     "Browse this week's stories and add the ones worth sharing."),
+    ("newsletter", "02", "mail", "Newsletter", f"{n_sel} {'story' if n_sel == 1 else 'stories'} selected"
+     if n_sel else "Add stories first", "Put them in order, edit the text and send a draft to Mailchimp."),
+    ("linkedin", "03", "share", "LinkedIn", f"{n_sel} {'post' if n_sel == 1 else 'posts'} ready"
+     if n_sel else "Add stories first", "Copy a ready-made post for each story and share it."),
+]
+view = ss.nav
+hub = st.columns([1, 0.07, 1, 0.07, 1], gap=None, vertical_alignment="center")
+for n, (v, num, sym, title, status, desc) in enumerate(STEPS):
+    with hub[n * 2]:
+        with st.container(key=f"hub-{'on' if v == view else 'off'}-{v}"):
+            st.html(f'<div class="hub-row"><span class="hub-num">{num}</span>'
+                    f'<span class="hub-status">{esc(status)}</span></div>'
+                    f'<div class="hub-title">{icon(sym)} {esc(title)}</div><p class="hub-desc">{esc(desc)}</p>')
+            st.button(f"Step {num}: {title}", key=f"hubbtn-{v}", on_click=go, args=(v,))
+    if n < 2:
+        hub[n * 2 + 1].html(f'<div class="hub-arrow">{icon("keyboard_double_arrow_right")}</div>')
 
 
 # ----------------------------------------------------------------- [01] browse
